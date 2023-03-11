@@ -5,8 +5,9 @@ let ui = {
     camera1: document.getElementById('camera1'),
     gearText: document.getElementById('gear-state'),
     autoSelect: document.getElementById('auto-select'),
-    climberState: document.getElementById('climb-state'),
-    assistState: document.getElementById('assist-state'),
+    pipelineState: document.getElementById('pipeline-state'),
+    reversedState: document.getElementById('reversed-state'),
+    speedMode: document.getElementById('speed-mode'),
     armState: document.getElementById('arm-state'),
     rectUp: document.getElementById('rectUp'),
     rectDown: document.getElementById('rectDown')
@@ -43,47 +44,52 @@ NetworkTables.addKeyListener('/SmartDashboard/High Gear', (key, value) => { //FI
         ui.gearText.classList.remove(on);
     }
 });
-NetworkTables.addKeyListener('/SmartDashboard/Driver Assist', (key, value) => { //FINAL NETWORKTABLE VALUE
+NetworkTables.addKeyListener('/SmartDashboard/is Reversed', (key, value) => { //FINAL NETWORKTABLE VALUE
     if(value == true) {
-        ui.assistState.innerHTML = 'CONNECTED';
-        ui.assistState.classList.add(on);
-        ui.assistState.classList.remove(off);
+        ui.reversedState.innerHTML = 'CONNECTED';
+        ui.reversedState.classList.add(on);
+        ui.reversedState.classList.remove(off);
     } else {
-        ui.assistState.innerHTML = 'DISCONNECTED';
-        ui.assistState.classList.add(off);
-        ui.assistState.classList.remove(on);
-    }
-});
-NetworkTables.addKeyListener('/SmartDashboard/Auto Climb', (key, value) => { //FINAL NETWORKTABLE VALUE
-    if(value == true) {
-        ui.climberState.innerHTML = 'ACTIVE';
-        ui.climberState.classList.add(on);
-        ui.climberState.classList.remove(off);
-    } else {
-        ui.climberState.innerHTML = 'INACTIVE';
-        ui.climberState.classList.add(off);
-        ui.climberState.classList.remove(on);
-    }
-});
-NetworkTables.addKeyListener('/SmartDashboard/Arm Up', (key, value) => { //FINAL NETWORKTABLE VALUE
-    if(value == true) {
-        ui.armState.innerHTML = 'UP';
-        ui.armState.classList.add(on);
-        ui.armState.classList.remove(off);
-
-        ui.rectUp.setAttribute("opacity", "1.0");
-        ui.rectDown.setAttribute("opacity", "0.15");
-
-    } else {
-        ui.armState.innerHTML = 'DOWN';
-        ui.armState.classList.add(off);
-        ui.armState.classList.remove(on);
-
-        ui.rectUp.setAttribute("opacity", "0.15");
-        ui.rectDown.setAttribute("opacity", "1.0");
+        ui.reversedState.innerHTML = 'DISCONNECTED';
+        ui.reversedState.classList.add(off);
+        ui.reversedState.classList.remove(on);
     }
 });
 
+NetworkTables.addKeyListener('/SmartDashboard/Pipeline', (key, value) => { //FINAL NETWORKTABLE VALUE
+    ui.pipelineState.textContent = value; 
+    pipelineState.value = value;
+    pipelineState.innerHTML = value;
+});
+
+NetworkTables.addKeyListener('/SmartDashboard/Arm State', (key, value) => { //FINAL NETWORKTABLE VALUE
+    ui.armState.textContent = value;
+    armState.value = value;
+    ui.armState.innerHTML = value;
+});
+
+NetworkTables.addKeyListener('/SmartDashboard/Half Speed', (key, value) => { //FINAL NETWORKTABLE VALUE
+    if(value == true) {
+        ui.speedMode.textContent = 'HALF';
+        ui.speedMode.innerHTML = 'HALF';
+        speedMode.value = value;
+    } else {
+        NetworkTables.addKeyListener('/SmartDashboard/Full Speed', (key,value) => {
+            if(value == true) {
+                ui.speedMode.textContent = 'FULL';
+                ui.speedMode.innerHTML = 'FULL';
+                speedMode.value = value;
+            } else {
+                ui.speedMode.textContent = 'QUARTER';
+                ui.speedMode.innerHTML = 'QUARTER';
+                speedMode.value = value;
+            }
+        });
+    }
+});
+
+
+-
 
 // UNTESTED:
 // Load list of prewritten autonomous modes
