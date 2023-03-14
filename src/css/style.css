@@ -128,15 +128,21 @@ hr {
     grid-area: auton;
 }
 
-#auto-climber {
-    grid-area: climb;
+#gear {
+    grid-area: gear;
+    font-size: 12vh;
 }
 
 #driver-assist {
     grid-area: assist;
 }
 
+#reversed-state {
+    font-size: 12vh;
+    grid-area: reversed-state;
+}
 #arm {
+    font-size: 12vh;
     grid-area: arm;
 }
  

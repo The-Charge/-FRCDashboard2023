@@ -5,7 +5,7 @@ let ui = {
     camera1: document.getElementById('camera1'),
     gearText: document.getElementById('gear-state'),
     autoSelect: document.getElementById('auto-select'),
-    pipelineState: document.getElementById('pipeline-state'),
+    // pipelineState: document.getElementById('pipeline-state'),
     reversedState: document.getElementById('reversed-state'),
     speedMode: document.getElementById('speed-mode'),
     armState: document.getElementById('arm-state'),
@@ -55,25 +55,68 @@ NetworkTables.addKeyListener('/SmartDashboard/is Reversed', (key, value) => { //
     }
 });
 
-NetworkTables.addKeyListener('/SmartDashboard/Pipeline', (key, value) => { //FINAL NETWORKTABLE VALUE
-    if (value == true) {
-        ui.pipelineState.textContent = value;
-        pipelineState.value = value;
-        pipelineState.innerHTML = value;
-    } else {
-        ui.pipelineState.textContent = value;
-        pipelineState.value = value;
-        pipelineState.innerHTML = value;
-    }
-    //ui.reversedState.innerHTML = 'Normal';
-    //ui.reversedState.classList.add(off);
-    //ui.reversedState.classList.remove(on);
-});
+// NetworkTables.addKeyListener('/SmartDashboard/Pipeline', (key, value) => { //FINAL NETWORKTABLE VALUE
+//     if (value == true) {
+//         ui.pipelineState.textContent = value;
+//         pipelineState.value = value;
+//         pipelineState.innerHTML = value;
+//     } else {
+//         ui.pipelineState.textContent = value;
+//         pipelineState.value = value;
+//         pipelineState.innerHTML = value;
+//     }
+//     //ui.reversedState.innerHTML = 'Normal';
+//     //ui.reversedState.classList.add(off);
+//     //ui.reversedState.classList.remove(on);
+// });
 
 NetworkTables.addKeyListener('/SmartDashboard/Arm State', (key, value) => { //FINAL NETWORKTABLE VALUE
-    ui.armState.textContent = value;
-    armState.value = value;
-    ui.armState.innerHTML = value;
+   if(value == 0) {
+        ui.armState.textContent = 'NUETRAL (0)';
+        armState.value = 0;
+        ui.armState.innerHTML = 'NUETRAL (0)';
+   }
+    else if(value == 1) {
+        ui.armState.textContent = '1';
+        armState.value = 1;
+        ui.armState.innerHTML = '1';
+    } 
+    else if(value == 2) {
+        ui.armState.textContent = '2';
+        armState.value = 2;
+        ui.armState.innerHTML = '2';
+    }
+     else if(value == 3) {
+        ui.armState.textContent = '3';
+        armState.value = 3;
+        ui.armState.innerHTML = '3';
+    }
+    else if(value == 4) {
+        ui.armState.textContent = '4';
+        armState.value = 4;
+        ui.armState.innerHTML = '4';
+    }
+    else if(value == 5) {
+        ui.armState.textContent = '5';
+        armState.value = 5;
+        ui.armState.innerHTML = '5';
+    }
+    else if(value == 6) {
+        ui.armState.textContent = '6';
+        armState.value = 6;
+        ui.armState.innerHTML = '6';
+    }
+    else if(value == 7) {
+        ui.armState.textContent = '7';
+        armState.value = 7;
+        ui.armState.innerHTML = '7';
+    }
+    else if(value == 8) {
+        ui.armState.textContent = '8';
+        armState.value = 8;
+        ui.armState.innerHTML = '8';
+    }
+
 });
 
 NetworkTables.addKeyListener('/SmartDashboard/Half Speed', (key, value) => { //FINAL NETWORKTABLE VALUE
